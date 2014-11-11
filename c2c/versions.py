@@ -30,13 +30,22 @@
 
 import sys
 import yaml
-from subprocess import check_output
 from pkg_resources import parse_version
+try:
+    from subprocess import check_output
+except ImportError:  # pragma: nocover
+    from subprocess import Popen, PIPE
+
+    def check_output(cmd, cwd=None, stdin=None, stderr=None, shell=False):  # noqa
+        """Backwards compatible check_output"""
+        p = Popen(cmd, cwd=cwd, stdin=stdin, stderr=stderr, shell=shell, stdout=PIPE)
+        out, err = p.communicate()
+        return out
 
 
 def main():
     if len(sys.argv) != 3:  # pragma: nocover
-        print "Usage: {cmd} <config file> <section>"
+        print("Usage: {cmd} <config file> <section>")
 
     with open(sys.argv[1]) as config_file:
         config = yaml.load(config_file)
@@ -56,7 +65,9 @@ def main():
                 version_str = str(version_object.get('version', '0'))
                 operation = version_object.get('operation', '>=')
                 if version_object.get('can_be_virtual', False):
-                    output = check_output(['/usr/bin/apt-cache', 'showpkg', package])
+                    output = check_output(
+                        ['/usr/bin/apt-cache', 'showpkg', package]
+                    ).decode('utf-8')
                     packages = [package]
                     in_reverse_provides = False
                     for line in output.split('\n'):
@@ -69,16 +80,24 @@ def main():
 
             version = parse_version(version_str)
             try:
-                current_version_str = check_output(cmd.format(package=package), shell=True).split('\n')[0].strip()
+                current_version_str = check_output(
+                    cmd.format(package=package), shell=True
+                ).decode('utf-8').split('\n')[0].strip()
             except:  # pragma: nocover
-                print "{package} doesn't seam to be installed (required version: {version}).".format(
-                    package=package, version=version_str
+                print(
+                    "{package} doesn't seam to be installed "
+                    "(required version: {version}).".format(
+                        package=package, version=version_str
+                    )
                 )
                 error = 1
                 continue
             if len(current_version_str) == 0:  # pragma: nocover
-                print "{package} doesn't seam to be installed (required version: {version}).".format(
-                    package=package, version=version_str
+                print(
+                    "{package} doesn't seam to be installed "
+                    "(required version: {version}).".format(
+                        package=package, version=version_str
+                    )
                 )
                 error = 1
                 continue
@@ -90,7 +109,9 @@ def main():
                     print(
                         "{package} doesn't have the right version "
                         "({current_version} <> {version})".format(
-                            package=package, current_version=current_version_str, version=version_str
+                            package=package,
+                            current_version=current_version_str,
+                            version=version_str
                         )
                     )
                     error = 1
@@ -99,7 +120,9 @@ def main():
                     print(
                         "{package} doesn't have the right version "
                         "({current_version} >= {version})".format(
-                            package=package, current_version=current_version_str, version=version_str
+                            package=package,
+                            current_version=current_version_str,
+                            version=version_str
                         )
                     )
                     error = 1
@@ -108,7 +131,9 @@ def main():
                     print(
                         "{package} doesn't have the right version "
                         "({current_version} <= {version})".format(
-                            package=package, current_version=current_version_str, version=version_str
+                            package=package,
+                            current_version=current_version_str,
+                            version=version_str
                         )
                     )
                     error = 1
@@ -117,7 +142,9 @@ def main():
                     print(
                         "{package} doesn't have the right version "
                         "({current_version} > {version})".format(
-                            package=package, current_version=current_version_str, version=version_str
+                            package=package,
+                            current_version=current_version_str,
+                            version=version_str
                         )
                     )
                     error = 1
@@ -126,12 +153,14 @@ def main():
                     print(
                         "{package} doesn't have the right version "
                         "({current_version} < {version})".format(
-                            package=package, current_version=current_version_str, version=version_str
+                            package=package,
+                            current_version=current_version_str,
+                            version=version_str
                         )
                     )
                     error = 1
             else:  # pragma: nocover
-                print "Unknown operation: %s" % operation
+                print("Unknown operation: %s" % operation)
                 error = 1
 
         exit(error)
