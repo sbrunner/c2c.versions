@@ -1,0 +1,37 @@
+default_cmd: dpkg -l {package} | grep ^ii | awk '{{print $3}}'
+
+main:
+    mapserver:
+        cmd: /usr/lib/cgi-bin/mapserv -v | awk '{{print $3}}'
+        version: 6.0
+    python:
+        cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
+        version: 2.7
+    python3:
+        cmd: /usr/bin/python3 --version 2>&1 | awk '{{print $2}}'
+        version: 3.3
+    postgres:
+        cmd: sudo /usr/lib/postgresql/9.1/bin/postmaster --version
+        version: 9.1
+    postgis: 
+        cmd: sudo -u postgres psql template_postgis -c "select PostGIS_full_version();" -At
+        cmd: sudo -u postgres psql template_postgis -c "select PostGIS_lib_version();" -At
+        version: 1.6
+    deploy: 0.4
+    java:
+        cmd: java -version 2>&1 | grep 'java version' | awk '{{print $3}}' | sed 's/"//g'
+        version: 1.7
+    tomcat:
+        cmd: /usr/share/tomcat6/bin/version.sh | grep 'Server number' | awk '{{print $3}}'
+        version: 6.0
+    sencha: 
+        cmd: sencha help 2> /dev/null | grep 'Sencha Cmd' | head -n 1 | awk '{{print $3}}' | sed 's/^v//'
+    ruby-compass: 0
+    gdal:
+        cmd: gdal-config --version
+        version: 1.9
+    libproj0: 4.7
+
+virtual:
+    telnet-client:
+        can_be_virtuel: True

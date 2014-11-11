@@ -8,19 +8,11 @@ here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
 
 install_requires = [
-    'setuptools',
-    'zc.buildout',
-]
-
-tests_require = [
-    'nosexcover',
-    'nose-progressive',
-    'ipdbplugin',
-    'unittest2',
+    'PyYAML',
 ]
 
 setup(
-    name='c2c.recipe.pkgversions',
+    name='c2c.versions',
     version='0.3',
     description='Test dependencies on Debian package versions',
     long_description=README,
@@ -30,7 +22,6 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Programming Language :: Python',
-        'Framework :: Buildout :: Recipe',
         'Topic :: System :: Installation/Setup',
     ],
     author='Stéphane Brunner',
@@ -42,10 +33,9 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=install_requires,
-    tests_require=tests_require,
     entry_points={
-        "zc.buildout": [
-            "default = c2c_recipe_pkgversions:PkgVersions",
+        "console_scripts": [
+            "c2c-versions = c2c.versions:main",
         ]
     }
 )

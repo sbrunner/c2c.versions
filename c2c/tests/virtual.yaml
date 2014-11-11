@@ -1,0 +1,5 @@
+default_cmd: dpkg -l {package} 2> /dev/null | grep ^ii | awk '{{print $3}}'
+
+virtual:
+    telnet-client:
+        can_be_virtual: True

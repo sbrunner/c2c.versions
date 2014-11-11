@@ -1,0 +1,49 @@
+default_cmd: dpkg -l {package} | grep ^ii | awk '{{print $3}}'
+
+ok:
+    python: 2.7.5
+    python_cmd:
+        cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
+    python_default:
+        cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
+        version: 2.7.5
+    python_gteq:
+        cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
+        version: 2.7.5
+        operation: '>='
+    python_lteq:
+        cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
+        version: 3.0
+        operation: '<='
+    python_gt:
+        cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
+        version: 2.7.5
+        operation: '>'
+    python_lt:
+        cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
+        version: 3.0
+        operation: <
+
+nok_def:
+    python:
+        version: 3.0
+nok_eq:
+    python:
+        version: 2.7.5
+        operation: '=='
+nok_gt:
+    python:
+        version: 3.0
+        operation: '>'
+nok_gteq:
+    python:
+        version: 3.0
+        operation: '>='
+nok_lt:
+    python:
+        version: 2.5
+        operation: <
+nok_lteq:
+    python:
+        version: 2.5
+        operation: '<='
