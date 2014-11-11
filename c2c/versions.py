@@ -30,8 +30,17 @@
 
 import sys
 import yaml
-from subprocess import check_output
 from pkg_resources import parse_version
+try:
+    from subprocess import check_output
+except ImportError:  # pragma: nocover
+    from subprocess import Popen, PIPE
+
+    def check_output(cmd, cwd=None, stdin=None, stderr=None, shell=False):  # noqa
+        """Backwards compatible check_output"""
+        p = Popen(cmd, cwd=cwd, stdin=stdin, stderr=stderr, shell=shell, stdout=PIPE)
+        out, err = p.communicate()
+        return out
 
 
 def main():
