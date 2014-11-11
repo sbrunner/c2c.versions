@@ -36,7 +36,7 @@ from pkg_resources import parse_version
 
 def main():
     if len(sys.argv) != 3:  # pragma: nocover
-        print "Usage: {cmd} <config file> <section>"
+        print("Usage: {cmd} <config file> <section>")
 
     with open(sys.argv[1]) as config_file:
         config = yaml.load(config_file)
@@ -56,7 +56,9 @@ def main():
                 version_str = str(version_object.get('version', '0'))
                 operation = version_object.get('operation', '>=')
                 if version_object.get('can_be_virtual', False):
-                    output = check_output(['/usr/bin/apt-cache', 'showpkg', package])
+                    output = check_output(
+                        ['/usr/bin/apt-cache', 'showpkg', package]
+                    ).decode('utf-8')
                     packages = [package]
                     in_reverse_provides = False
                     for line in output.split('\n'):
@@ -71,7 +73,7 @@ def main():
             try:
                 current_version_str = check_output(
                     cmd.format(package=package), shell=True
-                ).split('\n')[0].strip()
+                ).decode('utf-8').split('\n')[0].strip()
             except:  # pragma: nocover
                 print(
                     "{package} doesn't seam to be installed "
@@ -149,7 +151,7 @@ def main():
                     )
                     error = 1
             else:  # pragma: nocover
-                print "Unknown operation: %s" % operation
+                print("Unknown operation: %s" % operation)
                 error = 1
 
         exit(error)

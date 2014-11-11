@@ -42,7 +42,7 @@ class TestVersions(TestCase):
         exp = None
         try:
             main()
-        except SystemExit, e:
+        except SystemExit as e:
             exp = e
 
         self.assertIsNotNone(exp)
@@ -51,14 +51,14 @@ class TestVersions(TestCase):
     def test_nok(self):
         from c2c.versions import main
         for section in ['nok_def', 'nok_eq', 'nok_gt', 'nok_gteq', 'nok_lt', 'nok_lteq']:
-            print "Test section %s" % section
+            print("Test section %s" % section)
             sys.argv = [
                 '', 'c2c/tests/python.yaml', section
             ]
             exp = None
             try:
                 main()
-            except SystemExit, e:
+            except SystemExit as e:
                 exp = e
 
             self.assertIsNotNone(exp)
@@ -72,7 +72,7 @@ class TestVersions(TestCase):
         exp = None
         try:
             main()
-        except SystemExit, e:
+        except SystemExit as e:
             exp = e
 
         self.assertIsNotNone(exp)
