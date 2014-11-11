@@ -69,16 +69,24 @@ def main():
 
             version = parse_version(version_str)
             try:
-                current_version_str = check_output(cmd.format(package=package), shell=True).split('\n')[0].strip()
+                current_version_str = check_output(
+                    cmd.format(package=package), shell=True
+                ).split('\n')[0].strip()
             except:  # pragma: nocover
-                print "{package} doesn't seam to be installed (required version: {version}).".format(
-                    package=package, version=version_str
+                print(
+                    "{package} doesn't seam to be installed "
+                    "(required version: {version}).".format(
+                        package=package, version=version_str
+                    )
                 )
                 error = 1
                 continue
             if len(current_version_str) == 0:  # pragma: nocover
-                print "{package} doesn't seam to be installed (required version: {version}).".format(
-                    package=package, version=version_str
+                print(
+                    "{package} doesn't seam to be installed "
+                    "(required version: {version}).".format(
+                        package=package, version=version_str
+                    )
                 )
                 error = 1
                 continue
@@ -90,7 +98,9 @@ def main():
                     print(
                         "{package} doesn't have the right version "
                         "({current_version} <> {version})".format(
-                            package=package, current_version=current_version_str, version=version_str
+                            package=package,
+                            current_version=current_version_str,
+                            version=version_str
                         )
                     )
                     error = 1
@@ -99,7 +109,9 @@ def main():
                     print(
                         "{package} doesn't have the right version "
                         "({current_version} >= {version})".format(
-                            package=package, current_version=current_version_str, version=version_str
+                            package=package,
+                            current_version=current_version_str,
+                            version=version_str
                         )
                     )
                     error = 1
@@ -108,7 +120,9 @@ def main():
                     print(
                         "{package} doesn't have the right version "
                         "({current_version} <= {version})".format(
-                            package=package, current_version=current_version_str, version=version_str
+                            package=package,
+                            current_version=current_version_str,
+                            version=version_str
                         )
                     )
                     error = 1
@@ -117,7 +131,9 @@ def main():
                     print(
                         "{package} doesn't have the right version "
                         "({current_version} > {version})".format(
-                            package=package, current_version=current_version_str, version=version_str
+                            package=package,
+                            current_version=current_version_str,
+                            version=version_str
                         )
                     )
                     error = 1
@@ -126,7 +142,9 @@ def main():
                     print(
                         "{package} doesn't have the right version "
                         "({current_version} < {version})".format(
-                            package=package, current_version=current_version_str, version=version_str
+                            package=package,
+                            current_version=current_version_str,
+                            version=version_str
                         )
                     )
                     error = 1
