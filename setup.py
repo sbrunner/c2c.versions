@@ -13,7 +13,7 @@ install_requires = [
 
 setup(
     name='c2c.versions',
-    version='0.3',
+    version='0.4',
     description='Command to tests program version',
     long_description=README,
     classifiers=[
