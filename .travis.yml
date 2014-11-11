@@ -1,15 +1,19 @@
-nguage: python
+language: python
+
 python:
 - 2.7
+- 3.2
+- 3.3
+- 3.4
 
 install:
-- virtualenv venv
-- venv/bin/pip install -r dev-requirements.txt
+- sudo apt-get install telnet
+- pip install -r dev-requirements.txt
 
 script: 
-- venv/bin/flake8 --version
-- venv/bin/flake8 c2c --max-line-length=100
-- venv/bin/python setup.py nosetests 
+- flake8 --version
+- flake8 c2c --max-line-length=100
+- python setup.py nosetests
 
 after_success:
 - pip install coveralls

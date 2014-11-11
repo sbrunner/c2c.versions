@@ -1,15 +1,15 @@
 default_cmd: dpkg -l {package} | grep ^ii | awk '{{print $3}}'
 
 ok:
-    python: 2.7.5
+    python: 2.7.2
     python_cmd:
         cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
     python_default:
         cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
-        version: 2.7.5
+        version: 2.7.2
     python_gteq:
         cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
-        version: 2.7.5
+        version: 2.7.2
         operation: '>='
     python_lteq:
         cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
@@ -17,7 +17,7 @@ ok:
         operation: '<='
     python_gt:
         cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
-        version: 2.7.5
+        version: 2.7.2
         operation: '>'
     python_lt:
         cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
@@ -29,7 +29,7 @@ nok_def:
         version: 3.0
 nok_eq:
     python:
-        version: 2.7.5
+        version: 2.7.2
         operation: '=='
 nok_gt:
     python:
