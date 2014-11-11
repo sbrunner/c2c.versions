@@ -14,7 +14,7 @@ install_requires = [
 setup(
     name='c2c.versions',
     version='0.3',
-    description='Test dependencies on Debian package versions',
+    description='Command to tests program version',
     long_description=README,
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -26,9 +26,9 @@ setup(
     ],
     author='Stéphane Brunner',
     author_email='stephane.brunner@camptocamp.com',
-    url='http://github.com/sbrunner/c2c.recipe.pkgversions',
+    url='http://github.com/sbrunner/c2c.versions',
     license='BSD',
-    keywords='debian package versons',
+    keywords='check package programme version',
     packages=find_packages(exclude=["*.tests", "*.tests.*"]),
     include_package_data=True,
     zip_safe=False,

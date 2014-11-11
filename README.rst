@@ -1,29 +1,26 @@
-c2c.recipe.pkgversions
-======================
+c2c.versions
+============
 
-Recipe used to test the Debian package requirement.
+Command to tests program version.
 
-This recipe requires that dpkg is in the path.
+Example of use:
 
-Example of use::
+Config file:
 
-    [buildout]
-    parts = ...
-        pkgversions
-        ...
+code:: yaml
 
-    [pkgversions]
-    recipe = c2c.recipe.pkgversions
-    mapserver-bin = 6.0.3
-    libproj0 = 4.8
+    default_cmd: dpkg -l {package} | grep ^ii | awk '{{print $3}}'
 
-This example tests that we have at least the version 6.0.3 of mapserver,
-and the version 4.8 of proj.
+    main:
+        python: # use python version
+            cmd: /usr/bin/python --version 2>&1 | awk '{{print $2}}'
+            version: 2.7 
+        python3: # use package verion
+            version: 3.3
 
-No version mean no-test.
+Command:
 
-To just test that the package is installed use the version
-``dev`` (minimal version) or ``installed`` (alias).
+``c2c.versions config.yaml main``
 
-It the version is set to ``not-installed`` mean that
-we want that the package isn't installed.
+This example tests that we have at least the version 2.7 of python 2
+and the version 3.3 of python 3.
