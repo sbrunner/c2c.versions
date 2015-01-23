@@ -7,7 +7,7 @@ Example of use:
 
 Config file:
 
-code:: yaml
+.. code-block:: yaml
 
     default_cmd: dpkg -l {package} | grep ^ii | awk '{{print $3}}'
 
