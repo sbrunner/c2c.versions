@@ -31,7 +31,7 @@
 import sys
 try:
     from unittest2 import TestCase
-except ImportError:
+except ImportError:  # pragma: nocover
     from unittest import TestCase
 
 
