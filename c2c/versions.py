@@ -30,7 +30,8 @@
 
 import sys
 import yaml
-from pkg_resources import parse_version
+from distutils.version import LooseVersion
+
 try:
     from subprocess import check_output
 except ImportError:  # pragma: nocover
@@ -78,7 +79,7 @@ def main():
                             packages.append(line.split()[0])
                     package = ' '.join(packages)
 
-            version = parse_version(version_str)
+            version = LooseVersion(version_str)
             try:
                 current_version_str = check_output(
                     cmd.format(package=package), shell=True
@@ -102,7 +103,7 @@ def main():
                 error = 1
                 continue
 
-            current_version = parse_version(current_version_str)
+            current_version = LooseVersion(current_version_str)
 
             if operation == '==':
                 if not version == current_version:
