@@ -16,6 +16,7 @@ setup(
     version='0.5',
     description='Command to tests program version',
     long_description=README,
+    namespace_packages=['c2c'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
