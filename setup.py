@@ -13,7 +13,7 @@ install_requires = [
 
 setup(
     name='c2c.versions',
-    version='0.5',
+    version='1.0.0',
     description='Command to tests program version',
     long_description=README,
     namespace_packages=['c2c'],
