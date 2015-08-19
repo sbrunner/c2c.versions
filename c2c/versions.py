@@ -86,7 +86,7 @@ def main():
                 ).decode('utf-8').split('\n')[0].strip()
             except:  # pragma: nocover
                 print(
-                    "{package} doesn't seam to be installed "
+                    "{package} doesn't seem to be installed "
                     "(required version: {version}).".format(
                         package=package, version=version_str
                     )
@@ -95,7 +95,7 @@ def main():
                 continue
             if len(current_version_str) == 0:  # pragma: nocover
                 print(
-                    "{package} doesn't seam to be installed "
+                    "{package} doesn't seem to be installed "
                     "(required version: {version}).".format(
                         package=package, version=version_str
                     )
